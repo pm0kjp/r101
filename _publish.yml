@@ -1,4 +1,6 @@
 - source: project
   quarto-pub:
-    - id: 5c23120c-2d19-41b9-aad7-db3f4755c0fe
-      url: 'https://rosemhartman.quarto.pub/slides'
+    - id: null
+      url: null
+    - id: a6af8a92-4599-4224-9a8e-d8235b49d5af
+      url: 'https://joy-payton.quarto.pub/r101'
