@@ -92,6 +92,10 @@ It's much easier to work using Projects, in which all of your analysis and data 
 countdown(minutes = 3, seconds = 0)
 ```
 
+::: notes
+Okay, so here we are creating a new project and opening it in a new session.  It's very important to use the "open in new session" checkbox.  Please do this, it should only take you a minute or so.  Please leave this session open, because I'd like for you to have more than one R session open today.
+:::
+
 ## Directories and File Paths {.smaller}
 
 * Navigating file paths can be tricky
@@ -100,19 +104,49 @@ countdown(minutes = 3, seconds = 0)
   - `.` means "this directory"
   - `..` means "one level up from this directory"
   - `~` means "my home directory"
+  - `/` as the first symbol means "start at the root"
 * Relative path -- "directions from here"
 * Absolute path -- "directions from anywhere"
+* Working directory -- R's "starting place"
 
 [Great module on Directories and File Paths](https://liascript.github.io/course/?https://raw.githubusercontent.com/arcus/education_modules/main/directories_and_file_paths/directories_and_file_paths.md#1)
+
+::: notes
+OK, so one of the dirty little secrets of learning data analysis is that one of the biggest challenges some people have, especially if they've never worked in the command line, is finding their own files.  They know they downloaded it, or they double clicked on a .csv file attachment in Outlook and they're not sure where that file lives.  OR, you send your analysis file to someone, but the path in your analysis file doesn't match the path in their computer to the data they want to analyze, and it's a huge issue to explain to them how to fix the issue.
+
+I won't go into file paths in depth here, but I do want to assert that navigating file paths can be tricky.  My recommendation is that if you're working with data that exists in files (like a .csv of data), you move that data to be in a directory that is close to where your analysis scripts are.  This is one way RStudio projects can help.  
+
+Also, just a bit of explanation for writing file paths.  Windows is a weird operating system and is unlike the rest of the world's major operating systems (Unix, Linux, Mac) in how it does file paths.  Most file paths use forward slashes, not backward slashes.  And a few aliases are useful to know.  A single dot means "this directory", two dots means "go up one layer to the directory that holds this one, and a tilde means "my home directory", which will differ from user to user on a shared system like a server.  Finally, if you have a path that starts with a slash, it means "go to the root, the directory that holds all other directories on this computer."
+
+In your analysis scripts, you'll often have to decide if you want to use a relative path or an absolute path to tell R where a file is.  There are advantages and disadvantages to both.
+
+A relative path assumes that we're starting in the same place.  So if I was at home, describing where my ergonomic keyboard is, I'd say "go upstairs to the second floor, and then on the street side of the house, there's my office.  Then go inside and you'll find the keyboard on my desk."
+
+But if you're NOT in my house, you're in your house, which doesn't have a second floor, you would say, "hey, your directions to go to the second floor don't make sense."  A relative path doesn't work when we're not starting in the same place.  And that brings us to the idea of a working directory.  Any time you are working in R, it's running with a starting point, its working directory.  And you might go open up an R script that's in a totally different starting point.  The great thing about RStudio projects is that when you open a project, R automatically makes the working directory that project directory.  
+
+An absolute path is a path that includes enough detail so that the location is clear from anywhere in the computer.  For example, an absolute path would be if I said, "go to 123 Main Street, Philadelphia, go inside, go to the second floor, go to the street side, open the door, go inside, and look on the desk.  The keyboard is there."
+:::
+
+## Your Turn #2 {.smaller background-color="#e3faf1"}
+
+For each of your R sessions (you should have at least two!):
+
+* In your console, type "getwd()".
+
+Are they different?  How could this affect your analysis?  
+
+```{r echo=FALSE}
+countdown(minutes = 1, seconds = 0)
+```
 
 ## The Data Analysis Pipeline
 
 ![](media/import_phase.png){.two-thirds fig-align="center"}
 
 ::: notes
-The first step in the data analysis pipeline is to bring in, or **import**, the data to your environment, which for the purposes of this workshop is R.
+The first step in the data analysis pipeline is to bring in, or **import**, the data to your environment.  And we've already talked about how locating files that contain data can be tricky.  One simple way to make this a bit easier is to use RStudio projects, which create directories that hold all your materials related to an analysis task or project.  Later I'll have you create a new project from a version control source, so that you have exercise and solutions files for our work together in this course.
 
-In today's session, we'll work with a fabricated (completely made up) data set consisting of COVID-19 laboratory test results from a hypothetical infectious disease diagnostics lab. This data is stored as a **CSV file**.  Note that this data is artifically clean.  Most data doesn't come like this!
+To start, we'll work with a fabricated (completely made up) data set consisting of COVID-19 laboratory test results from a hypothetical infectious disease diagnostics lab. This data is stored as a **CSV file**.  Note that this data is artifically clean.  Most data doesn't come like this, perfectly groomed with no missingness, no mispellings, and no problems.  Most data needs at least a little massaging to be able to be usable, so I want to set the expectation that what we do with a beautifully groomed .csv is unrealistic in most cases.  Later on in the course we'll deal with more realistic data, that has problems and issues, and we'll talk about how to handle those issues.
 
 One very important thing to note is that you will need to install R packages into your copy of this project.  At first we really wanted to have all your packages pre-loaded, but now we see the wisdom of teaching you how to install and load packages right away.  It may take a few more minutes of our time today, but this is a crucial skill that you definitely need to develop.  We'll make sure to slow down and ensure that you get the packages installed that you need in order to do this work!
 
@@ -267,13 +301,233 @@ To be honest, quotes in R can be super confusing. A couple of rules are:
 Sometimes, either quoting or not quoting works. This is one of the things where you will get a good sense but not until after some trial and error. If a line of code you're working on doesn't seem to be working as you expect, sometimes adding or removing quotes can be a good place to start when trying to figure it out.
 :::
 
-## Your Turn #2 {.smaller background-color="#e3faf1"}
+## Your Turn #3 {.smaller background-color="#e3faf1"}
 
-In your R console (the lower left pane in RStudio), enter the following:
+In your R console (the lower left pane in RStudio), in any session (it doesn't matter which one you use), enter the following:
 
 * install.packages("tidyverse")
 
 ```{r echo=FALSE}
 countdown(minutes = 1, seconds = 0)
 ```
+
+
+## Your Turn #4 {.smaller background-color="#e3faf1"}
+
+Now you're going to open a new project using version control.
+
+If you have git installed:
+
+* Click on File > New Project
+* Choose "New Directory"
+* Choose "Version Control"
+* Choose Git
+
+[This is where you might have issues, if you don't have git installed...]
+
+
+
+```{r echo=FALSE}
+countdown(minutes = 3, seconds = 0)
+```
+
+
+## Your Turn #3 {.smaller background-color="#e3faf1"}
+
+In the Files pane, click on the folder `exercises`.
+
+Open the file titled `session_2.qmd`. Instructions for this exercise are in the text of the document.
+
+Click the thumbs up button in Teams when you are done.
+
+```{r}
+countdown(minutes = 5, seconds = 0)
+```
+
+::: notes
+Once again, I want you to go into Posit.cloud, and this time you'll work with an existing file we've placed in the server for your use. You'll go into the folder called "exercises" and fine the first assignment, called "Introduction". Go ahead and open that, and read the rest of the instructions there.
+
+We've tried to install the tidyverse set of packages to the project you made a copy of, but our experience is that it doesn't always work when the project gets copied over -- you might have to use install.packages and install tidyverse.  If that happens, we apologize, but we know that using install.packages early will be good practice for you, so hopefully you'll forgive us if we don't have everything installed that you need!
+
+We'll give you five minutes for this, and when you're done, click the "thumbs up" button so we know how folks are doing.
+
+**After the timer finishes, do the exercise live so they can see what it looks like...**
+
+I'm going to start by running this code chunk. I can go to the "Run" button at the top right of the Source pane, or I can click the "run" or "play" button on top of the chunk.
+
+When I'm coding, I like to break my code up into chunks of only a few lines of code at a time. That way, if I have to make a change, it's easy to just run the code I need to re-run, without re-running the whole thing.
+
+Now, did anything change when I ran this chunk that ingests data from a .csv? Yes! In the environment pane, a new data object appeared. And I can interact with this object in several ways. I can click the triangle beside the object's name, or I can click on the object name itself.
+
+So, let's answer the questions. How can I tell how many rows and columns there are? I can look beside the name of the object in my Environment pane and I see a number of observations, which are rows, and a number of variables, which are columns. I can also use the data view that opens up in my source pane here. At the very bottom there's a count of rows and columns. Did anyone else figure out the answer in a different way?
+
+What about question two? Any ideas? Well, remember that we want our data analysis to be reproducible, so everything we do to the data is written in code. Changing data using point and click isn't reproducible. That's an important reason why R doesn't have a data editing feature using point and click.
+
+Does anyone want to put in their answer for number 3? \[Correct answers: 4, 107\] Great!
+
+And number 4? (865 positive tests, \_\_ in the first 30 days).
+
+If I want to check my answers, I can go in the Files pane, click beside the up arrow to go into the parent directory, go down into solutions, and open the solutions for our first assignment.
+:::
+
+## Recap {.smaller}
+
+::: {.columns .one-third .centered}
+::: {.column .tiny-text width="33%"}
+![](media/r_logo.png){.half .centered}
+
+Programming Language
+:::
+
+::: {.column .tiny-text width="33%"}
+![](media/rstudio_logo.png){.one-third .centered}
+
+IDE (Editor)
+:::
+
+::: {.column .tiny-text width="33%"}
+![](media/quarto.png){.one-third .centered}
+
+Document Format
+:::
+:::
+
+::: {.columns .centered width="80%"}
+::: {.column width="25%"}
+![](media/package.png){width="60px" fig-align="center"}
+:::
+
+::: {.column .small-text width="75%"}
+**Packages** extend the functionality of R. Install with `install.packages()` and load with `library()`
+:::
+:::
+
+::: {.columns .centered width="80%"}
+::: {.column width="25%"}
+![](media/function_4.png)
+:::
+
+::: {.column .small-text width="75%"}
+**Functions** do stuff. They accept **Arguments** as input and return an **Output**. Capture an output in an Object using the **assignment operator** ( `<-` ).
+:::
+:::
+
+::: {.columns .centered width="80%"}
+::: {.column width="25%"}
+![](media/csv_import.png)
+:::
+
+::: {.column .small-text width="75%"}
+**Importing Data** is the first step of data analysis. Use `read_csv()` from the `tidyverse` package to import data stored in a **CSV file**.
+:::
+:::
+
+::: notes
+We started by defining and differentiating **R** (the programming language) from **RStudio** (the integrated development environment -- IDE -- or editor) and **R Markdown** (the document format we use for reproducible data analysis). Then we explored RStudio and R Markdown more closely.
+
+We then looked at how packages extend the functionality of R. Tidyverse is a package that is actually shorthand for a number of related packages. We'll work with tidyverse a lot today.
+
+We also looked at how to use functions. Functions, like the read_csv function, do useful things. You provide some arguments, and functions will return an output, which you can store in an object, if you want to.
+
+Finally, we tackled the first step of data analysis: importing (or you'll sometimes hear people use the word "ingesting") data. In our case today, we're going to import data from a .csv file.
+:::
+
+## What Else?
+
+Obviously in each short session and over this brief course we can barely scratch the surface... here are some other ideas to get you thinking.
+
+::: notes
+At the end of each session I'm including a "what else" section to introduce you to "what else" there is out there for your to explore and learn about after completing this course.
+:::
+
+## Cheat Sheets
+
+![](media/cheat_sheet_browse.png){.bordered .two-thirds fig-align="center"}
+
+::: notes
+To find official cheat sheets, go to the Help menu in RStudio and choose "Cheat Sheets". You can look around the short list provided, which includes great options for beginners such as "RStudio IDE Cheat Sheet", "R Markdown Cheat Sheet", and more. You can also "Browse", and on the RStudio website you'll find other cheat sheets as well, including the Data Import cheat sheet.
+
+RStudio's Data Import cheat sheet helps with importing data from file types similar to CSV but with other delimiters (for example, TSV, or tab-delimited values files). Cheat sheets for the RStudio IDE and Markdown can reinforce what you've learned so far in this workshop and help you extend your capabilities.
+:::
+
+## R for Data Science {.smaller}
+
+::: columns
+::: {.column width="30%"}
+![](media/r4ds.png)
+:::
+
+::: {.column width="70%"}
+In English: 
+
+* 2nd edition: <https://r4ds.hadley.nz/>
+* 1st edition: <https://r4ds.had.co.nz>
+
+English unofficial solutions (1st ed) at <https://jrnold.github.io/r4ds-exercise-solutions/index.html>
+
+In Spanish (1st ed): <https://es.r4ds.hadley.nz/>
+:::
+:::
+
+::: notes
+*R for Data Science* is a free text that provides lots of helpful explanation and examples. The [section on data import](https://r4ds.had.co.nz/data-import.html) goes into much more detail than we were able to do in this brief workshop.
+
+The entire text is available [in English](https://r4ds.had.co.nz/) and [in Spanish](https://es.r4ds.hadley.nz/). There's also an [unofficial solutions guide](https://jrnold.github.io/r4ds-exercise-solutions/index.html) (only available in English) to allow you to check your work.
+:::
+
+## File Formats
+
+![](media/file_types.png){.two-thirds fig-align="center"}
+
+::: notes
+Not all data is in CSV files, and fortunately R supports a huge number of other file formats, and here are some of the packages that help import or export them:
+
+-   Readxl: Microsoft Excel
+-   Haven: SPSS, Stata, and SAS files
+-   Googlesheets: Google Sheets
+-   Rvest: web scraping
+-   Jsonlite: JSON data and many APIs on the web
+:::
+
+## Databases
+
+![](media/databases.png){.two-thirds fig-align="center"}
+
+::: notes
+You can also connect to a large number of **databases** directly in R to pull your data. For example, you can connect to SQL databases including MySQL and Oracle, as well as using APIs (application programming interfaces) for data collection applications like REDCap and websites with API access like PubMed or the New York Times.
+:::
+
+## Other Output Formats
+
+![](media/document_output.png){.two-thirds fig-align="center"}
+
+::: notes
+In addition to HTML, R Markdown documents can be "knitted" into a number of additional formats including PDF, Microsoft Word, PowerPoint, and even interactive dashboards. We won't go into these additional formats today but it's helpful to know that you can avoid error-prone cut and paste when you need to create documentation about your research and data analysis.
+:::
+
+## R Interface to Python {.smaller}
+
+::: columns
+::: {.column width="40%"}
+![](media/r_python.png)
+:::
+
+::: {.column width="60%"}
+::: {.code-block .small_text}
+\`\`\`{python}
+
+import pandas
+
+covid_testing.info()
+
+\`\`\`
+:::
+:::
+:::
+
+::: notes
+In addition to R, R Markdown supports many other programming languages, including Python.
+
+So you can mix code chunks written in R with code chunks written in, say, SQL or Python. While we won't get into the use of other languages in this workshop, it's useful to be aware of multiple language support, especially for teams in which some users prefer R and others Python.
+:::
 
