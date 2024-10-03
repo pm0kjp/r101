@@ -1,0 +1,279 @@
+---
+format: 
+  revealjs:
+    theme: [serif, custom.scss]
+    scrollable: true
+    logo: media/chop_ri_logo.png
+    footer: Arcus Education 
+    css: styles.css
+---
+
+-   Use keyboard arrow keys to
+    -   advance ( → ) and
+    -   go back ( ← )
+-   Type "s" to see speaker notes
+-   Type "?" to see other keyboard shortcuts
+
+```{r echo = FALSE}
+library(countdown)
+```
+
+------------------------------------------------------------------------
+
+| Date       | Proposed Topics         |
+|--------------|---------------|
+| October 3  | Introduction to R/RStudio |
+| October 10 | Data Ingestion and Projects |
+| October 17  | Break (I have a conflict) |
+| October 24  | Data Visualization with ggplot2 |
+| October 31  | Transforming data with dplyr |
+| November 7   | Break (You have a conflict)  |
+| November 14 | Tidying data |
+| November 21   | Recap and next steps for growing in R |
+
+
+::: notes
+Here's our plan for the course.  We can adapt as we go and I learn more about pacing.
+:::
+
+## Goals for Today {.smaller}
+
+Data Ingestion and Projects
+  
+  * Projects in RStudio
+  * Packages and Functions
+  * Tabular data ingestion from files
+  * File system considerations
+  * Data visualization preview
+
+
+## Projects in RStudio {.smaller}
+
+* Keeping track of your files is hard!
+* Projects allow you to keep your various efforts separated
+* They also allow you to have multiple sessions of R open that don't interfere with each other.
+
+::: notes
+If you're like me, you might work on several different analysis projects at a time.  And if you just have one R session and are trying to work with lots of things at the same time, you can accidentally trip over yourself.  If you have two different R scripts, each of which creates the object `my_data`, or `cleaned_data`, or a similar kind of generic name, what happens when you go back and forth between these files?  You end up clobbering yourself.
+
+It's much easier to work using Projects, in which all of your analysis and data files are stored in the same directory.  RStudio can also dedicate a session per project if you want.
+:::
+
+## Ways to Create a Project  {.smaller}
+
+::: columns
+::: {.column .small-text width="50%"}
+1) Start from scratch 
+2) Create a project from a directory you've already been working in
+3) Create a project from version control 
+::: 
+::: {.column .small-text width="50%"}
+
+![](media/project_types.png)
+::: 
+::: 
+
+::: notes
+
+:::
+
+## Your Turn #1 {.smaller background-color="#e3faf1"}
+
+* Click on File > New Project
+* Choose "New Directory"
+* Choose "New Project"
+* Choose a reasonable parent directory
+* Give your directory a name like test_project
+* Check the box that says "open in new session"
+* Click "Create Project"
+
+
+```{r echo=FALSE}
+countdown(minutes = 3, seconds = 0)
+```
+
+## Directories and File Paths {.smaller}
+
+* Navigating file paths can be tricky
+* Projects can help
+* A few tips:
+  - `.` means "this directory"
+  - `..` means "one level up from this directory"
+  - `~` means "my home directory"
+* Relative path -- "directions from here"
+* Absolute path -- "directions from anywhere"
+
+[Great module on Directories and File Paths](https://liascript.github.io/course/?https://raw.githubusercontent.com/arcus/education_modules/main/directories_and_file_paths/directories_and_file_paths.md#1)
+
+## The Data Analysis Pipeline
+
+![](media/import_phase.png){.two-thirds fig-align="center"}
+
+::: notes
+The first step in the data analysis pipeline is to bring in, or **import**, the data to your environment, which for the purposes of this workshop is R.
+
+In today's session, we'll work with a fabricated (completely made up) data set consisting of COVID-19 laboratory test results from a hypothetical infectious disease diagnostics lab. This data is stored as a **CSV file**.  Note that this data is artifically clean.  Most data doesn't come like this!
+
+One very important thing to note is that you will need to install R packages into your copy of this project.  At first we really wanted to have all your packages pre-loaded, but now we see the wisdom of teaching you how to install and load packages right away.  It may take a few more minutes of our time today, but this is a crucial skill that you definitely need to develop.  We'll make sure to slow down and ensure that you get the packages installed that you need in order to do this work!
+
+:::
+
+## CSV
+
+![](media/csv.png)
+
+::: notes
+So what's a .csv file? CSV stands for **comma-separated values**. When we say this aloud, we just say each letter: C - S - V.
+
+A .csv file is a plain text file, which means you can open it in a text editor and look at it. This is different than how you may have opened .csv files in the past, using Microsoft Excel or another spreadsheet program. This is an example of what raw csv data looks like when we open it in a text editor.
+
+Here we have a .csv file with the names, medical record numbers, and dates of birth for three fictional "patients".
+
+This data structure is called **rectangular** or **"tabular"** because it falls into rows and columns, often called a table, where each row has the same number of columns, and each columns has the same number of rows.
+
+Also note that this particular .csv file has a **header** row that instead of data, has a name for each column. .csv files often have such a header row and unless we specify otherwise, when we import this data, R assumes the first line is a header row. Not all .csv files have headers, however, so be aware that you might run across these at some point.
+:::
+
+## Tidyverse {.smaller}
+
+::: columns
+::: {.column width="70%"}
+-   A consistent way to organize data
+-   Human readable, concise, consistent code
+-   Build pipelines from atomic data analysis steps
+:::
+
+::: {.column width="30%"}
+![](media/tidyverse_logo.png)
+:::
+:::
+
+::: notes
+To import our CSV data, we need some additional data analysis tools. In this course, we will be leveraging the Tidyverse.
+
+The Tidyverse is a set of tools that has become the de facto standard for doing data science with R.
+
+The basic tenets of "tidy" data analysis include: 
+
+* Data should be organized in a consistent, standardized way. Each row is an observation, and each column is a variable. This is a very common way to organize data in a spreadsheet and might sound familiar from how you may already organize data in tools like Excel. 
+* Programming code that acts on the data should be consistent, concise, and sound like human language as much as possible. 
+* Each data analysis can be broken down into a series of atomic steps, such as "select this column" or "arrange the data by the values in that column". An arbitrarily complex data analysis can be broken down as a pipeline of atomic steps.
+:::
+
+## Installing and Loading Packages
+
+::: columns
+::: {.column .small-text width="50%"}
+![](media/package.png){.half}
+:::
+
+::: {.column .small-text width="50%"}
+![](media/install_load.png)
+:::
+:::
+
+::: notes
+The **tidyverse** is package (a collection of functions, data, and help documentation) that we can use to extend the innate functionality of R, which is often referred to as "base R". In fact, tidyverse is special because it includes a suite of interrelated packages that work together to do a number of tasks related to importing, reshaping, visualizing, and analyzing data.
+
+You can download and **install** a package with the command `install.packages`. For example, to install the tidyverse package, you would go to the R Console and type `install.packages("tidyverse")`. Each package you want to use needs to be installed only once on each computer.
+
+Make sure you **include the quotes** around tidyverse. When to use quotes is a tricky topic that we will talk about more later in this workshop, but for now, keep in mind that you will *always* need to put quotes around the name of a package whenever using `install.packages()`.
+
+After you've installed the package, in order to use the functions that it provides, you also need to **load** the package into the computer's memory. This is done with the command `library`. So to enable all the functions in the "tidyverse" package, you type `library("tidyverse")`. Packages remain loaded until you quit or restart the R program. Every time you start a new R session you have to load each package that you want to use again, and you need to put your `library` statements in the R documents that you write, preferably near the top of the file. We'll use functions within the `tidyverse` package in this workshop when we import data, so it's useful to learn about packages now.
+
+Congratulations, you've just learned your first two R commands - `install.packages` and `library`.
+
+One of the great things about R is that there are tens of thousands of packages that are free to download and use.
+:::
+
+
+## read_csv()
+
+![](media/function_0.png){.two-thirds fig-align="center"}
+
+![](media/csv_import.png){.half fig-align="center"}
+
+::: notes
+We can import CSV files using the `read_csv()` function.
+
+Here is how you use the `read_csv` function to read a CSV file into a data frame object. A data frame is a type of object that works like a spreadsheet and holds tabular (rectangular, row-and-column based) data.
+:::
+
+## Functions
+
+![](media/function_1.png){.two-thirds fig-align="center"}
+
+::: notes
+This code construct is exceedingly common in R, and it's a good moment to explain **functions**.
+
+`read_csv()` is a **function**. Functions are defined in packages. We loaded the tidyverse package to be able to use the `read_csv` function.
+
+You may be familiar with functions from math class or perhaps also from formulas in Excel. A function takes an input, say an 'x' value, and returns an output, say a 'y' value. Functions in computer programming also take inputs and return outputs. But the inputs and outputs here are the objects that exist within the context of a programming language.
+
+For `read_csv`, the input is the file name of a CSV file; and the output is a data frame with the contents of the file.
+:::
+
+## Functions
+
+![](media/function_2.png){.two-thirds fig-align="center"}
+
+::: notes
+In the snippet of code that reads in a csv to create a data frame, we have a **function** with an **argument** that creates an **object**.
+
+The input that goes into a function is called an **argument**. The argument to a function gets put in parentheses.
+
+A function can have zero, one, or many arguments. If there is more than one argument, we use commas to separate them.
+:::
+
+## Functions
+
+![](media/function_3.png){.two-thirds fig-align="center"}
+
+::: notes
+The output of the `read_csv` function is a data frame object. You will usually want to *capture* that data frame inside of a named object so you can use it as the input for other functions, for example to summarize or visualize your data.
+:::
+
+## Functions
+
+![](media/function_4.png){.two-thirds fig-align="center"}
+
+::: notes
+To put the output of the `read_csv` function into a named object, we use the **assignment operator**.
+
+The assignment operator is a less than symbol followed by a dash and resembles an arrow pointing left. Some people like to pronounce the arrow with the word "gets."
+:::
+
+## read_csv()
+
+![](media/covid_csv.png){.two-thirds fig-align="center"}
+
+![](media/csv_import.png){.half fig-align="center"}
+
+::: notes
+Let's put these pieces together to load our covid data set.
+
+Consider this line of code. We could speak aloud the line of code above saying "covid underscore testing gets read underscore csv of covid underscore testing dot csv", or we could gloss over the underscores and just say "covid testing" and "read csv". When we talk with others about R, this is often what we do, so just be aware that you sometimes have to intuit underscores when someone is reading aloud or talking through a code issue.
+
+You might notice that one of our "covid testing" objects is put in quotes and the other one isn't.
+
+To be honest, quotes in R can be super confusing. A couple of rules are:
+
+-   Names of objects such as data frames don't get quotes.
+-   Literal file names are always put in quotes.
+-   When you're referring to a string value, like "abc123" or "jones", you have to use quotes.
+-   Names of packages, when you're installing especially, use quotes
+-   But in `library`, putting the package name in quotes is optional!
+
+Sometimes, either quoting or not quoting works. This is one of the things where you will get a good sense but not until after some trial and error. If a line of code you're working on doesn't seem to be working as you expect, sometimes adding or removing quotes can be a good place to start when trying to figure it out.
+:::
+
+## Your Turn #2 {.smaller background-color="#e3faf1"}
+
+In your R console (the lower left pane in RStudio), enter the following:
+
+* install.packages("tidyverse")
+
+```{r echo=FALSE}
+countdown(minutes = 1, seconds = 0)
+```
+

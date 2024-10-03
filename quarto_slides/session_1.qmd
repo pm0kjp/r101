@@ -693,8 +693,9 @@ Optional additional learning:
 
 Data Ingestion and Projects
 
+  * Projects in RStudio
+  * Packages and Functions
   * Tabular data ingestion from files
-  * Projects in R
   * File system considerations
   * Data visualization preview
   
