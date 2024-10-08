@@ -40,11 +40,182 @@ Here's our plan for the course.  We can adapt as we go and I learn more about pa
 
 Data Ingestion and Projects
   
+  * Homework check (NO PRESSURE)
+  * Quarto Documents
   * Projects in RStudio
   * Packages and Functions
   * Tabular data ingestion from files
   * File system considerations
   * Data visualization preview
+
+
+## Homework {.smaller}
+
+* Install / [get installed](https://chop.service-now.com/esc?id=sc_cat_item&sys_id=fbf31958db4efe00de9e782bbf96192c): [R](https://lib.stat.cmu.edu/R/CRAN/), [RStudio Desktop](https://posit.co/download/rstudio-desktop/), [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), and [GitHub Desktop](https://docs.github.com/en/desktop/installing-and-authenticating-to-github-desktop/installing-github-desktop) 
+
+Optional additional learning:
+
+| Module       | Description       | Duration |
+|--------------|---------------|----|
+| [Learning to Learn Data Science](https://liascript.github.io/course/?https://raw.githubusercontent.com/arcus/education_modules/main/learning_to_learn/learning_to_learn.md#1) | Discover how learning data science is different than learning other subjects.| 20 mins |
+| [Reproducibility, Generalizability, and Reuse](https://liascript.github.io/course/?https://raw.githubusercontent.com/arcus/education_modules/main/reproducibility/reproducibility.md#1) | This module provides learners with an approachable introduction to the concepts and impact of research reproducibility, generalizability, and data reuse, and how technical approaches can help make these goals more attainable. | 60 min |
+
+
+## Why Bother With Reproducibility? {.smaller}
+
+-   Can we redo the analysis with this month's data?
+-   Why do the data in Table 1 not seem to agree with Figure 2?
+-   Why did I decide to omit these six samples from my analysis?
+
+Your closest collaborator is **you** from 6 months ago...
+
+::: notes
+Reproducibility doesn't only help people **outside** a study understand how things were done. They also help the initial conduct of research as well. Consider the following 3 statements and ask yourself if they sound familiar.
+
+-   Can we redo the analysis with this month's data?
+-   Why do the data in Table 1 not seem to agree with Figure 2?
+-   Why did I decide to omit these six samples from my analysis?
+
+**Your closest collaborator is you from 6 months ago...**
+
+... but they don't answer your emails!
+
+If you use data cleaning and data analysis scripts in R, scripts that record each step you do in code, it can be much easier to retrace your steps or rerun your entire analysis with just a couple of clicks to re-run the script. You could, for example, have a script that goes and gets the latest data directly from REDCap, removes any outliers according to pre-established rules, does some statistical tests on two groups, creates a table and data visualization, and saves all of that in a .pdf that is already formatted with the special rules of the journal you want to submit to.  You could keep collecting data via REDCap and simply re-run that script with a single click and get an updated report.  This will make your life easier in the long run, even though it means an up-front investment of writing code.
+
+Additionally, we've already seen how irreproducibility can cause real harm to human subjects, something we all want to avoid.
+:::
+
+------------------------------------------------------------------------
+
+
+
+![](media/quarto.png){.half fig-align="center"}
+
+::: notes
+Quarto and R Markdown allow you to write computer code mixed in with English (or other human language) narrative annotation that documents the purpose of the code and details about the decisions you made in your analysis.
+
+Quarto, like R Markdown before it, is quickly becoming the standard for reproducible data analysis. A primary aim of this workshop is to teach you to use Quarto and to encourage you to start working it into your day to day data workflows.
+:::
+
+## Anatomy of a Quarto Document
+
+![](media/quarto_anatomy.png){fig-align="center"}
+
+::: notes
+Quarto documents are composed of 3 basic types of building blocks.
+
+The first is the **header** which includes information about the document, such as its title, author, and the desired output format when the document is rendered. A lot of this information is optional so a header can be pretty short, like the one we see here, or much longer.
+
+The second type of building block is **text**. Text can include special kinds of marks (Markdown) that add styling. This includes hash marks that turn a line of text into a header, asterisks that can create italics, lines of dashes that turn into horizontal lines, and more.  Markdown is used everywhere in tech, not just in R Markdown or Quarto.  Markdown is useful to learn if you're going to use GitHub, or Python, or LaTex, or just about anything in the tech world where you're expected to write some sort of documentation.
+
+The third is **code chunks**. Code chunks contain R code that can be executed to output results.
+:::
+
+## Running a Single Code Chunk {.smaller}
+
+![](media/quarto_run_chunk.png){.two-thirds fig-align="center"}
+
+Can you see the green "play" button?
+
+That's how you run this chunk!
+
+::: notes
+So how do you execute the code in the code chunks? There are a couple of ways.
+
+The first is to run the code in a single code chunk. And you do this by clicking the green right-pointing triangle on the top right of the chunk. This symbol looks like a "play" button. There are other symbols, too, including one that means "run all the code chunks that came before this one".
+:::
+
+## Rendering {.smaller}
+
+You will see ("Knit"/"Preview" instead of "Render" in R Markdown documents)
+
+::: columns
+::: {.column .small-text width="62%"}
+![](media/pre_render_quarto.png){.bordered}
+:::
+
+::: {.column .small-text width="32%"}
+![](media/post_render_quarto.png){.bordered}
+:::
+:::
+
+::: notes
+The second way to execute code is to convert the entire Quarto document into HTML (or another target format). For now we'll stick to HTML because it's the default and usually what you want. This process of converting Quarto into a target format is called "rendering".
+
+To render a document, click the button that says "Render". Then in a few moments, a rendered document will be shown.
+
+If you are working in R Markdown, like R Notebooks, you'll see the word "Preview" or "Knit" instead. That also acts to render the Markdown.
+:::
+
+------------------------------------------------------------------------
+
+::: columns
+::: {.column .small-text width="60%"}
+![](media/pre_render_detail.png){.bordered}
+:::
+
+::: {.column .small-text width="40%"}
+![](media/post_render_detail.png){.bordered}
+:::
+:::
+
+::: notes
+Let's look at this Quarto document in a little more detail. On the slide you see the Quarto document and the resulting output in HTML that was created when this document was rendered.
+
+I'd like to explain what each part of the markdown includes in a bit more detail.
+
+Again, the first block is the **header** section. The line that starts with `title:` tells R Markdown that the title should be "My Markdown Document". The line starting with `format:` communicates that when the document is rendered, we want to output to be an html document. 
+
+In the resulting HTML document there's the title "My Markdown Document" in large type letters. The header is enclosed on both sides with three dashes, and the data inside is in a format called "YAML" (spelled YAML, rhymes with Hammill). YAML, according to most people, stands for "Yet Another Markup Language", and it consists of a named field, a colon, and the value for that field.
+
+Here we also have some narrative **text** with marks such as hash marks and asterisks. Having a hash mark at the beginning of a line makes that line a header, and the more hash marks you write, the smaller the header. Depending on where you write it, asterisks serve different functions. If you use just one asterisk at the start of a line, it makes an item in a bulleted list. If you surround text on both sides by either one or two asterisks, the text renders as either italicized or bolded, respectively. This system of using special marks to indicate how text should look is called **Markdown**.
+
+Then we get to the code chunks. Don't worry about the contents of the code for now - in brief, the first code chunk asks R to generate 100 random values and then print out some summary statistics. The knitted document shows us our code in a gray box to make it visually distinct from the text; and then immediately after, the results of that code after it was executed. Code chunks are enclosed by three "backticks" (not single quotes), and the letter "r" enclosed in curly braces. Check out your keyboard now to see if you can find the backtick. It's likely in a corner of your keyboard, and in many layouts it travels alongside the tilde, or squiggle, symbol. The letter "r" enclosed in curly braces tells RStudio what language is being used, in our case, the R language.
+
+The second code chunk demonstrates that (1) in addition to text output, you can also make R create graphical plots, and (2) you can tweak the behavior of a code chunk -- note that this code chunk has an option of echo as FALSE. This tells R that you don't want it to repeat, or "echo", the code in the rendered document. Notice that while the code itself is suppressed in the rendered output document, the results of the code (that is, the graph), does appear.
+
+Now let's practice creating a Quarto document, running a code chunk, and knitting.
+:::
+
+## Your Turn #1 {.smaller background-color="#e3faf1"}
+
+Go to File \> New File \> R Markdown Document. Click OK.
+
+* This will give you a handy template which is used to show you a working example of a simple R Markdown document. You will be asked to provide a title and author, and you can choose any values you like, such as "Test" or "My First Markdown".
+* You can choose "Source" or "Visual" at the top of the edit pane.  Try them both.  What's the difference?
+* Run each code chunk by clicking the green "play" button (![](media/play.png){.inline-image height="1em"}). Note what happens.
+* Knit (aka "render") the document. Type "test" and click Save to save the HTML file. Inspect the HTML document.  You might get a pop-up blocker, and if you do, just try again.
+
+```{r}
+countdown(minutes = 3, seconds = 0)
+```
+
+::: notes
+It's your turn again.
+
+Follow the instructions in Your Turn #2 to:
+
+* create a new R Markdown document
+* run all of the code chunks, and 
+* render the document
+
+When you start the document, it will ask you to fill in some information like a title, and you can add what you like.
+
+When you render the document, it will ask you for a filename to save to -- just enter "test" as the filename, or whatever you'd like.
+
+We will meet back in 3 minutes to review this exercise together.
+
+
+**Live Coding Section** (Switch to Posit and do the exercise)
+
+A few things to note as I go through this: the header starts with 3 dashes and ends with 3 dashes.
+
+I want to point out that each code chunk starts with 3 backticks and "r" in curly braces, and ends with 3 backticks. RStudio helps your recognize code chunks because it makes code chunks have a gray background.
+
+Note that we saved test.Rmd (R Markdown file) and test.html (knitted HTML file). You might wonder why you want to deal with two files. Rmd is source code document. It contains code, and to be able to use it, you need to have R installed. The Rmd file makes things reproducible and it's great to share with another data analyst or a journal. The HTML is a presentation file that you can show in any web browser. It doesn't require the user to have R installed, and it's not for running code, it's for showing your work. This is the kind of file you might share with your boss or other stakeholders who don't want to work in R or RStudio but are curious about what you did.
+
+Can anyone tell me why is the gray code box missing in the rendered document? That's right, there's an echo=FALSE, which means "hey, please don't show this code in the final document." "Echo" here means "print what we typed". Sometimes showing your code is helpful, but sometimes it can be distracting, especially if you're using Quarto to create a report that just shows results, for example, to show your PI some information about recruitment goals. If your stakeholders don't want to see the code, but just the result of the code, use "echo = FALSE".
+:::
 
 
 ## Projects in RStudio {.smaller}
@@ -77,7 +248,7 @@ It's much easier to work using Projects, in which all of your analysis and data 
 
 :::
 
-## Your Turn #1 {.smaller background-color="#e3faf1"}
+## Your Turn #2 {.smaller background-color="#e3faf1"}
 
 * Click on File > New Project
 * Choose "New Directory"
@@ -127,7 +298,7 @@ But if you're NOT in my house, you're in your house, which doesn't have a second
 An absolute path is a path that includes enough detail so that the location is clear from anywhere in the computer.  For example, an absolute path would be if I said, "go to 123 Main Street, Philadelphia, go inside, go to the second floor, go to the street side, open the door, go inside, and look on the desk.  The keyboard is there."
 :::
 
-## Your Turn #2 {.smaller background-color="#e3faf1"}
+## Your Turn #3 {.smaller background-color="#e3faf1"}
 
 For each of your R sessions (you should have at least two!):
 
@@ -301,20 +472,20 @@ To be honest, quotes in R can be super confusing. A couple of rules are:
 Sometimes, either quoting or not quoting works. This is one of the things where you will get a good sense but not until after some trial and error. If a line of code you're working on doesn't seem to be working as you expect, sometimes adding or removing quotes can be a good place to start when trying to figure it out.
 :::
 
-## Your Turn #3 {.smaller background-color="#e3faf1"}
+## Your Turn #4 {.smaller background-color="#e3faf1"}
 
 In your R console (the lower left pane in RStudio), in any session (it doesn't matter which one you use), enter the following:
 
-* install.packages("tidyverse")
+* `install.packages("tidyverse")`
 
 ```{r echo=FALSE}
 countdown(minutes = 1, seconds = 0)
 ```
 
 
-## Your Turn #4 {.smaller background-color="#e3faf1"}
+## Your Turn #5 {.smaller background-color="#e3faf1"}
 
-Now you're going to open a new project using version control.
+Part 1: Now you're going to open a new project using version control.
 
 If you have git installed:
 
@@ -326,13 +497,42 @@ If you have git installed:
 [This is where you might have issues, if you don't have git installed...]
 
 
+```{r echo=FALSE}
+countdown(minutes = 1, seconds = 0)
+```
+
+
+## Your Turn #5 {.smaller background-color="#e3faf1"}
+
+Part 2: Clone the project exercises!
+
+* Add this url as the "Repository URL": https://github.com/arcus/r101_exercises.git
+* Optionally, add a directory name (default will be r101_exercises)
+* Optionally, change the parent directory
+* Click "open in new session" box
+* Click "Create Project"
+
+
 
 ```{r echo=FALSE}
 countdown(minutes = 3, seconds = 0)
 ```
 
+## Your Turn #5 {.smaller background-color="#e3faf1"}
 
-## Your Turn #3 {.smaller background-color="#e3faf1"}
+Part 3: Don't have git installed?  You'll need to download a zip file.  
+
+* Go to https://github.com/arcus/r101_exercises
+* Find the green "Code" button and click on it
+* Download the zip file
+* Open the zip file
+* Click on File > New Project
+* Choose "Existing Directory"
+* Browse to find that r101_exercises directory
+* Check "Open in new session" box
+* Click "Create Project"
+
+## Your Turn #6 {.smaller background-color="#e3faf1"}
 
 In the Files pane, click on the folder `exercises`.
 
@@ -369,165 +569,3 @@ And number 4? (865 positive tests, \_\_ in the first 30 days).
 
 If I want to check my answers, I can go in the Files pane, click beside the up arrow to go into the parent directory, go down into solutions, and open the solutions for our first assignment.
 :::
-
-## Recap {.smaller}
-
-::: {.columns .one-third .centered}
-::: {.column .tiny-text width="33%"}
-![](media/r_logo.png){.half .centered}
-
-Programming Language
-:::
-
-::: {.column .tiny-text width="33%"}
-![](media/rstudio_logo.png){.one-third .centered}
-
-IDE (Editor)
-:::
-
-::: {.column .tiny-text width="33%"}
-![](media/quarto.png){.one-third .centered}
-
-Document Format
-:::
-:::
-
-::: {.columns .centered width="80%"}
-::: {.column width="25%"}
-![](media/package.png){width="60px" fig-align="center"}
-:::
-
-::: {.column .small-text width="75%"}
-**Packages** extend the functionality of R. Install with `install.packages()` and load with `library()`
-:::
-:::
-
-::: {.columns .centered width="80%"}
-::: {.column width="25%"}
-![](media/function_4.png)
-:::
-
-::: {.column .small-text width="75%"}
-**Functions** do stuff. They accept **Arguments** as input and return an **Output**. Capture an output in an Object using the **assignment operator** ( `<-` ).
-:::
-:::
-
-::: {.columns .centered width="80%"}
-::: {.column width="25%"}
-![](media/csv_import.png)
-:::
-
-::: {.column .small-text width="75%"}
-**Importing Data** is the first step of data analysis. Use `read_csv()` from the `tidyverse` package to import data stored in a **CSV file**.
-:::
-:::
-
-::: notes
-We started by defining and differentiating **R** (the programming language) from **RStudio** (the integrated development environment -- IDE -- or editor) and **R Markdown** (the document format we use for reproducible data analysis). Then we explored RStudio and R Markdown more closely.
-
-We then looked at how packages extend the functionality of R. Tidyverse is a package that is actually shorthand for a number of related packages. We'll work with tidyverse a lot today.
-
-We also looked at how to use functions. Functions, like the read_csv function, do useful things. You provide some arguments, and functions will return an output, which you can store in an object, if you want to.
-
-Finally, we tackled the first step of data analysis: importing (or you'll sometimes hear people use the word "ingesting") data. In our case today, we're going to import data from a .csv file.
-:::
-
-## What Else?
-
-Obviously in each short session and over this brief course we can barely scratch the surface... here are some other ideas to get you thinking.
-
-::: notes
-At the end of each session I'm including a "what else" section to introduce you to "what else" there is out there for your to explore and learn about after completing this course.
-:::
-
-## Cheat Sheets
-
-![](media/cheat_sheet_browse.png){.bordered .two-thirds fig-align="center"}
-
-::: notes
-To find official cheat sheets, go to the Help menu in RStudio and choose "Cheat Sheets". You can look around the short list provided, which includes great options for beginners such as "RStudio IDE Cheat Sheet", "R Markdown Cheat Sheet", and more. You can also "Browse", and on the RStudio website you'll find other cheat sheets as well, including the Data Import cheat sheet.
-
-RStudio's Data Import cheat sheet helps with importing data from file types similar to CSV but with other delimiters (for example, TSV, or tab-delimited values files). Cheat sheets for the RStudio IDE and Markdown can reinforce what you've learned so far in this workshop and help you extend your capabilities.
-:::
-
-## R for Data Science {.smaller}
-
-::: columns
-::: {.column width="30%"}
-![](media/r4ds.png)
-:::
-
-::: {.column width="70%"}
-In English: 
-
-* 2nd edition: <https://r4ds.hadley.nz/>
-* 1st edition: <https://r4ds.had.co.nz>
-
-English unofficial solutions (1st ed) at <https://jrnold.github.io/r4ds-exercise-solutions/index.html>
-
-In Spanish (1st ed): <https://es.r4ds.hadley.nz/>
-:::
-:::
-
-::: notes
-*R for Data Science* is a free text that provides lots of helpful explanation and examples. The [section on data import](https://r4ds.had.co.nz/data-import.html) goes into much more detail than we were able to do in this brief workshop.
-
-The entire text is available [in English](https://r4ds.had.co.nz/) and [in Spanish](https://es.r4ds.hadley.nz/). There's also an [unofficial solutions guide](https://jrnold.github.io/r4ds-exercise-solutions/index.html) (only available in English) to allow you to check your work.
-:::
-
-## File Formats
-
-![](media/file_types.png){.two-thirds fig-align="center"}
-
-::: notes
-Not all data is in CSV files, and fortunately R supports a huge number of other file formats, and here are some of the packages that help import or export them:
-
--   Readxl: Microsoft Excel
--   Haven: SPSS, Stata, and SAS files
--   Googlesheets: Google Sheets
--   Rvest: web scraping
--   Jsonlite: JSON data and many APIs on the web
-:::
-
-## Databases
-
-![](media/databases.png){.two-thirds fig-align="center"}
-
-::: notes
-You can also connect to a large number of **databases** directly in R to pull your data. For example, you can connect to SQL databases including MySQL and Oracle, as well as using APIs (application programming interfaces) for data collection applications like REDCap and websites with API access like PubMed or the New York Times.
-:::
-
-## Other Output Formats
-
-![](media/document_output.png){.two-thirds fig-align="center"}
-
-::: notes
-In addition to HTML, R Markdown documents can be "knitted" into a number of additional formats including PDF, Microsoft Word, PowerPoint, and even interactive dashboards. We won't go into these additional formats today but it's helpful to know that you can avoid error-prone cut and paste when you need to create documentation about your research and data analysis.
-:::
-
-## R Interface to Python {.smaller}
-
-::: columns
-::: {.column width="40%"}
-![](media/r_python.png)
-:::
-
-::: {.column width="60%"}
-::: {.code-block .small_text}
-\`\`\`{python}
-
-import pandas
-
-covid_testing.info()
-
-\`\`\`
-:::
-:::
-:::
-
-::: notes
-In addition to R, R Markdown supports many other programming languages, including Python.
-
-So you can mix code chunks written in R with code chunks written in, say, SQL or Python. While we won't get into the use of other languages in this workshop, it's useful to be aware of multiple language support, especially for teams in which some users prefer R and others Python.
-:::
-
