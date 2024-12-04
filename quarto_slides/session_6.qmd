@@ -1,0 +1,111 @@
+---
+format: 
+  revealjs:
+    theme: [serif, custom.scss]
+    scrollable: true
+    logo: media/chop_ri_logo.png
+    footer: Arcus Education 
+    css: styles.css
+---
+
+-   Use keyboard arrow keys to
+    -   advance ( → ) and
+    -   go back ( ← )
+-   Type "s" to see speaker notes
+-   Type "?" to see other keyboard shortcuts
+
+```{r echo = FALSE}
+library(countdown)
+```
+
+## Review {.smaller}
+
+Session 1:
+
+  * Considerations for working with R at CHOP
+  * What you need for the course
+  * R and RStudio
+  * R Markdown and literate statistical programming
+  * Learning to learn data science
+
+## Review {.smaller}
+
+Session 2:
+
+-   Quarto Documents
+-   Projects in RStudio
+-   Packages and Functions
+-   Tabular data ingestion from files
+-   File system considerations
+-   Data visualization preview (if time permits)
+
+## Review {.smaller}
+
+Session 3:
+
+**Data visualization with ggplot2**
+
+-   Go over the exercise file for last week
+-   Update your exercise files using GitHub
+-   ggplot2 syntax
+-   Aesthetics / visuals
+
+## Review {.smaller}
+
+Session 4: 
+
+**Transforming data with `dplyr`**
+
+-   Using `select` to get just certain columns
+-   Using `filter` to get just certain rows
+-   Using `mutate` to create new columns
+-   Creating pipelines of these transformations
+- And some bonus color stuff to add on from last week!
+
+## Review {.smaller}
+
+Session 5:
+
+* Use package documentation in R
+* Learn some tips for working in Quarto / R Markdown
+* Tidy data with real challenges / issues
+
+## Other Stuff We Learned {.smaller}
+
+* Working with Git (but not formally)
+* Working with Posit.cloud (but not formally)
+* Other topics I'm forgetting?
+
+## What we did NOT cover {.smaller}
+
+* REDCap API 
+* Statistical Tests
+* Modeling
+* Other important stuff?
+
+## What to improve next time: {.smaller}
+
+* Skip setting up individual devices
+* Tell you when something isn't going to work (example of "skip" last time)
+* Other improvements?
+
+## What went well?  {.smaller}
+
+* YOU -- willing to be my "guinea pigs" -- thank you!!!
+* Helping each other
+* Being live?
+* Other good stuff?
+
+## Take your survey!
+
+Your feedback is important!  
+
+Check your email....
+
+## Next steps / Open discussion {.smaller}
+
+* R 102 Webinar series from Spring 2024: <https://arcus.github.io/r102/> 
+* Asynchronous R materials from my team: <https://learn.arcus.chop.edu>
+* CHOP's R User Group: <https://bit.ly/chopRusers>
+
+

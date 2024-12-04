@@ -1,0 +1,227 @@
+---
+format: 
+  revealjs:
+    theme: [serif, custom.scss]
+    scrollable: true
+    logo: media/chop_ri_logo.png
+    footer: Arcus Education 
+    css: styles.css
+---
+
+-   Use keyboard arrow keys to
+    -   advance ( → ) and
+    -   go back ( ← )
+-   Type "s" to see speaker notes
+-   Type "?" to see other keyboard shortcuts
+
+```{r echo = FALSE}
+library(countdown)
+```
+
+## Educational consultations! {.smaller}
+
+<https://outlook.office365.com/book/StandardArcusEducationOfficeHours@CHOP365.onmicrosoft.com>
+
+Book with me or with any of my colleagues to get a customized data education pathway to help you learn the skills you want to learn!
+
+Sneak preview:
+
+![](media/dent_screenshot.png){.one-half .bordered}
+
+
+------------------------------------------------------------------------
+
+| Date        | Proposed Topics                       |
+|-------------|---------------------------------------|
+| October 3   | Introduction to R/RStudio             |
+| October 10  | Data Ingestion and Projects           |
+| October 17  | Break (I have a conflict)             |
+| October 24  | Data Visualization with ggplot2       |
+| October 31  | Transforming data with dplyr          |
+| November 7  | Break (You have a conflict)           |
+| November 14 | Tidying data                          |
+| November 21 | Recap and next steps for growing in R |
+
+::: notes
+Here's our plan for the course. We can adapt as we go and I learn more about pacing. Today I hope to talk about Data Visualization
+:::
+
+## Goals for Today {.smaller}
+
+* Use package documentation in R
+* Learn some tips for working in Quarto / R Markdown
+* Tidy data with real challenges / issues
+* Maybe start our lookback?
+
+## Update Your Exercise Files {.smaller}
+
+-   Open your "R 101 Exercises" project:
+    -   click on the .Rproj file in that folder OR
+    -   In RStudio, go to File \> Open Project in New Session
+-   Update your project with my latest additions:
+    -   click the "Git" button at the top
+    -   choose "Pull Branches"
+
+## The Data Analysis Pipeline
+
+![](media/tidy_transform_phase.png){.two-thirds fig-align="center"}
+
+## Getting and Reading Help {.smaller}
+
+You can open the RStudio help pane using a question mark before a function, like:
+
+* `?read_csv` (if you've already loaded `tidyverse` or `readr`)
+* `?readr::read_csv` (if you haven't loaded `readr`)
+
+You can also just go to the Help tab and search.
+Or, while you're typing a command and the "assist" box opens up, hit F1.
+
+## Learning to read a help file {.smaller}
+
+::: {.columns .v-center-container}
+::: {.column width="50%"}
+Help files can include:
+
+* Description (sometimes well written, but often have jargon)
+* Usage (takes practice but you can learn how to interpret)
+* Arguments (very useful when you need them, but don't bother reading them at the beginning)
+* Value (what do you get as output -- useful to know!)
+* Examples (my favorite part, often very very useful if you like to learn by doing)
+:::
+::: {.column width="50%"}
+![](media/rstudio-help.png){.bordered}
+:::
+:::
+## Usage and arguments {.smaller}
+
+Arguments that have default values include those in a help file:
+
+```
+read_csv(
+  file,
+  col_names = TRUE,
+  col_types = NULL,
+  col_select = NULL,
+  id = NULL,
+  locale = default_locale(),
+  na = c("", "NA"),
+  quoted_na = TRUE,
+  quote = "\"",
+  comment = "",
+  trim_ws = TRUE,
+  skip = 0,
+  n_max = Inf,
+  guess_max = min(1000, n_max),
+  name_repair = "unique",
+  num_threads = readr_threads(),
+  progress = show_progress(),
+  show_col_types = should_show_types(),
+  skip_empty_rows = TRUE,
+  lazy = should_read_lazy()
+)
+```
+
+## Zooming in on an argument {.smaller}
+
+guess_max
+
+> Maximum number of lines to use for guessing column types. Will never use more than the number of lines read. See vignette("column-types", package = "readr") for more details.
+
+## Messages and Warnings {.smaller}
+
+Messages and warnings can be helpful but once you have read them once and understand what they are about, you might want to suppress them.
+
+Here's a way to do that in your Quarto or R Markdown documents.  You'll see that in today's exercise!
+
+
+`knitr::opts_chunk$set(warning = FALSE, message = FALSE)`
+
+
+## Chunk Names {.smaller}
+
+You can give your chunks names in a Quarto or R Markdown document, and this can help you organize your thinking, manage a long document, and track where errors are happening:
+
+::: {.columns .v-center-container}
+::: {.column width="50%"}
+>\`\`\`{r load-libraries}
+>
+>library(tidyverse)
+>
+>\`\`\`
+:::
+::: {.column width="50%"}
+
+![](media/chunk-names.png){.bordered}
+:::
+:::
+
+## Factors {.smaller}
+
+Factors are categorical data.  Categorical / factor data are data in which every observation falls into a set number of values (like sick/well, male/female/intersex, one of the 50 states of the US, etc.)
+
+* Ordered: 
+  - small / medium / large
+  - stage 1 / stage 2 / stage 3 / stage 4
+  - January / February ... November / December
+
+* Unordered:
+  - benign / malignant
+  - [list of 50 states]
+  
+## Factors?
+
+Are these numbers, characters, or factors?
+
+* 19147
+* 19103
+* 19146
+* 19128
+
+How we treat these can matter to R in how it treats these data in terms of modeling!
+
+## Your Turn {.smaller}
+
+You should have a `session_5.qmd` in the `exercises` (and `solutions`)
+folder of your R101 Exercises project.  Go ahead and get cracking on that!
+
+## Review {.smaller}
+
+Session 1:
+
+  * Considerations for working with R at CHOP
+  * What you need for the course
+  * R and RStudio
+  * R Markdown and literate statistical programming
+  * Learning to learn data science
+
+Session 2:
+
+-   Homework check (NO PRESSURE)
+-   Quarto Documents
+-   Projects in RStudio
+-   Packages and Functions
+-   Tabular data ingestion from files
+-   File system considerations
+-   Data visualization preview (if time permits)
+
+## Review {.smaller}
+
+Session 3:
+
+**Data visualization with ggplot2**
+
+-   Go over the exercise file for last week
+-   Update your exercise files using GitHub
+-   ggplot2 syntax
+-   Aesthetics / visuals
+
+Session 4: 
+
+**Transforming data with `dplyr`**
+
+-   Using `select` to get just certain columns
+-   Using `filter` to get just certain rows
+-   Using `mutate` to create new columns
+-   Creating pipelines of these transformations
+- And some bonus color stuff to add on from last week!
+
